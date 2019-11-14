@@ -18,6 +18,9 @@ public class main extends Application{
   public static void main(String[] args){
     launch(args);
   }
+  public double a=10;
+  public double b=28;
+  public double c=8/3;
   public double findDx(double x, double y, double z, double dt){
     return 10*(y-x)*dt;
     //return (x - x*x*x/3 - y + 0)*dt;
@@ -115,54 +118,15 @@ public class main extends Application{
     */
     final double data[][]=dataset;
     new AnimationTimer(){
-      //public double[] x0={0.2,0.20001,0.20002,0.20003};
-      //public double[] x=x0;
-      //public double L=1;
-      //public double f(double x){
-      //  return x*x - L;
-      //}public double fD(double x){
-      //  return 2*x;
-      //}
-      public double[] w=new double[16*16*16];
-      public double[] v=new double[16*16*16];
-      public double[] u=new double[16*16*16];
       public double x=0;
       public double y=0;
       public double z=0;
-      public double xd=1;
-      public double yd=1;
-      public double zd=1;
-      public double r=-2;
 
       public double aa=0;
       public double bb=0;
 
-      public double t=Math.atan(1);
-      public double a=Math.atan(1);
-      public double findDx(double x, double y, double z, double dt){
-        return 10*(y-x)*dt;
-        //return (x - x*x*x/3 - y + 0)*dt;
-        //return (x*(3-x-2*y))*dt;
-        //return y*dt;
-        //return (y)*dt;
-        //return (y-y*y*y)*dt;
-      }public double findDy(double x, double y, double z, double dt){
-        return (28*x - y - x*z)*dt;
-        //return 0.08*(x+0.7-0.8*y)*dt;
-        //return (y*(2-x-y))*dt;
-        //return (x-x*x*x)*dt;
-        //return (-Math.sin(x))*dt;
-        //return (-x-y*y)*dt;
-      }public double findDz(double x, double y, double z, double dt){
-        return (x*y - 8/3 *z)*dt;
-        //return 0.08*(x+0.7-0.8*y)*dt;
-        //return (y*(2-x-y))*dt;
-        //return (x-x*x*x)*dt;
-        //return (-Math.sin(x))*dt;
-        //return (-x-y*y)*dt;
-      }
-      //public double x1=1;
-      //public double y1=1;
+      public double t=0;
+      public double a=Math.PI/2;
 
       public void handle(long currentNanoTime){
         gc.setFill(Color.ALICEBLUE);
@@ -170,15 +134,17 @@ public class main extends Application{
         double dt=0.001;
         double shift=0.01;
         double shiftb=0.02;
-        t+=shift;
-        a-=shift;
+        //Shift in other 2 axis
+        //t+=shift;
+        //a-=shift;
+        //Shift in 1 axis
+        //aa+=shiftb;
+        //Center points
         double cX=0;
-        double cY=10;
+        double cY=0;
         double cZ=20;
-        aa+=shiftb;
         gc.setFill(Color.rgb(0,0,0));
         for(int i=0;i<length;i++){
-          //Need to correct to be an ellipse
           double min=Math.sin(aa);
           double max=1;
           x=data[0][i]*max*Math.sin(a)-data[1][i]*max*Math.sin(t);
@@ -188,10 +154,6 @@ public class main extends Application{
 
           gc.fillOval(width/2 -10*xx + 10*x,height/2 + 10*yy - 10*y,1,1);
         }
-        //r=r+0.01;
-        //y=(r+0.7)/0.8;
-        //System.out.println(y);
-        //gc.fillOval((width/2 + 750/5 *r),(height/2 - 750/5 *y),3,3);
       }
     }.start();
     alphaStage.show();
